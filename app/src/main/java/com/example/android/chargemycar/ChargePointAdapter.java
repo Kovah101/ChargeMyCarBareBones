@@ -1,12 +1,11 @@
 package com.example.android.chargemycar;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,15 +16,15 @@ import java.util.ArrayList;
 
 public class ChargePointAdapter extends ArrayAdapter<ChargePoint> {
 
-    private static final String LOG_TAG = ChargePointAdapter.class.getSimpleName();
+    //private static final String LOG_TAG = ChargePointAdapter.class.getSimpleName();
 
     public ChargePointAdapter(Activity context, ArrayList<ChargePoint> chargePoints){
         super(context, 0, chargePoints);
     }
 
-    @NonNull
+
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position,  View convertView, ViewGroup parent) {
 
         View listItemView = convertView;
         if (listItemView == null){
@@ -50,9 +49,9 @@ public class ChargePointAdapter extends ArrayAdapter<ChargePoint> {
         postcodeTextView.setText(currentChargePoint.getPostCode());
 
 
-        //ImageView locationType = (ImageView) listItemView.findViewById(R.id.locationType);
-        //int locationImage = R.mipmap.ic_launcher; //will use case structure to vary icon depending on location
-        //locationType.setImageResource(locationImage);
+        ImageView locationType = (ImageView) listItemView.findViewById(R.id.locationType);
+        int locationImage = R.mipmap.ic_launcher; //will use case structure to vary icon depending on location
+        locationType.setImageResource(locationImage);
 
         TextView statusTextView = (TextView) listItemView.findViewById(R.id.status);
         boolean status = currentChargePoint.getStatus();
@@ -61,7 +60,7 @@ public class ChargePointAdapter extends ArrayAdapter<ChargePoint> {
             statusTextView.setBackgroundResource(R.color.statusGreen);
         }
         else {
-            statusTextView.setText("Out of Service");
+            statusTextView.setText("No Service");
             statusTextView.setBackgroundResource(R.color.statusRed);
         }
 
