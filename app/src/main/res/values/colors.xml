@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#33b726</color>
+    <color name="colorPrimaryDark">#51b02d</color>
+    <color name="colorAccent">#63fb46</color>
     <color name="statusGreen">#38dc31</color>
     <color name="statusRed">#dd0404</color>
+
+    <!-- Color for distance 0-1km -->
+    <color name="distance1">#0AEF05</color>
+
+    <!-- MColor for distance 1-2km -->
+    <color name="distance2">#35E907</color>
+
+    <!-- Color for distance 2-3km -->
+    <color name="distance3">#5DE408</color>
+
+    <!-- Color for distance 3-4km -->
+    <color name="distance4">#83DF0A</color>
+
+    <!-- Color for distance 4-5km-->
+    <color name="distance5">#A7DA0B</color>
+
+    <!-- Color for distance 5-6km -->
+    <color name="distance6">#C9D50C</color>
+
+    <!--Color for distance 6-7km-->
+    <color name="distance7">#CFB70D</color>
+
+    <!-- Color for distance 7-8km -->
+    <color name="distance8">#CA900E</color>
+
+    <!-- Color for distance 8-9km -->
+    <color name="distance9">#C56B0F</color>
+
+    <!-- Color for distance 9-10km -->
+    <color name="distance10">#C04810</color>
+
+    <!-- Color for distance 10km+ -->
+    <color name="distance10plus">#BB2711</color>
+
 </resources>

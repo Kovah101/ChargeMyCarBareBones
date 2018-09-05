@@ -1,6 +1,8 @@
 package com.example.android.chargemycar;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +18,14 @@ import java.util.ArrayList;
 
 public class ChargePointAdapter extends ArrayAdapter<ChargePoint> {
 
-    //private static final String LOG_TAG = ChargePointAdapter.class.getSimpleName();
 
     public ChargePointAdapter(Activity context, ArrayList<ChargePoint> chargePoints){
         super(context, 0, chargePoints);
     }
+
+//    public ChargePointAdapter(LocationListener locationListener, ArrayList<ChargePoint> chargePoints) {
+//        super((Context) locationListener, 0, chargePoints);
+    //}
 
 
     @Override
@@ -41,8 +46,9 @@ public class ChargePointAdapter extends ArrayAdapter<ChargePoint> {
         nameTextView.setText(currentChargePoint.getCPName());
 
         TextView distanceTextView = (TextView) listItemView.findViewById(R.id.distance);
-        String distance = Double.toString(currentChargePoint.getDistance());
-        distanceTextView.setText(distance);
+        distanceTextView.setText(currentChargePoint.getDistance());
+        GradientDrawable circle = (GradientDrawable)distanceTextView.getBackground().getCurrent();
+        circle.setColor(ContextCompat.getColor(getContext(),currentChargePoint.getColor()));
 
 
         TextView postcodeTextView = (TextView) listItemView.findViewById(R.id.postcode);
@@ -56,11 +62,11 @@ public class ChargePointAdapter extends ArrayAdapter<ChargePoint> {
         TextView statusTextView = (TextView) listItemView.findViewById(R.id.status);
         boolean status = currentChargePoint.getStatus();
         if (status){
-            statusTextView.setText("In Service");
+            statusTextView.setText("In Service " + currentChargePoint.getWorkingConnectors() + "/" + currentChargePoint.getConnectorNumber());
             statusTextView.setBackgroundResource(R.color.statusGreen);
         }
         else {
-            statusTextView.setText("No Service");
+            statusTextView.setText("No Service " + currentChargePoint.getWorkingConnectors() + "/" + currentChargePoint.getConnectorNumber());
             statusTextView.setBackgroundResource(R.color.statusRed);
         }
 
