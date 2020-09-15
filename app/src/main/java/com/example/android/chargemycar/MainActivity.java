@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static  String ChargePoint_REQUEST_URL = "http://chargepoints.dft.gov.uk/api/retrieve/registry/postcode/SW15+5QS/dist/7/format/json/limit/10";
 
-    private ChargePointAdapter adapter;
+    private static ChargePointAdapter adapter;
 
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -41,42 +42,53 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //TODO add burger menu for changing URL String components, use current location or set location
+        // TODO new symbol? graphics for loading screen too?
         // Find a reference to the {@link ListView} in the layout
         final ListView chargePointListView = (ListView) findViewById(R.id.list);
 
         // Create a ChargingPointAdapter, whose data source is a list of ChargePoints, which creates listview items for each item
         adapter = new ChargePointAdapter(this, new ArrayList<ChargePoint>());
 
-
+        /* create locationListener to request GPS data and track current position */
         locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
+            //when location changes, rewrite URL, retrieve charge points and change display
             public void onLocationChanged(Location location) {
                 //set lat & long variables
                 myLat = location.getLatitude();
                 myLong = location.getLongitude();
                 String myLatString = Double.toString(myLat);
                 String myLongString = Double.toString(myLong);
-
+                Log.e(LOG_TAG,"\n"+myLatString+"\n"+myLongString);
                 //test with toast
                 Context context = getApplicationContext();
-                CharSequence text = " my latitude=" +myLatString +"\nmy longitude=" +myLongString ;
+                CharSequence text = " my latitude=" + myLatString + "\nmy longitude=" + myLongString;
                 int duration = Toast.LENGTH_LONG;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
                 //create request URL using live location
-                ChargePoint_REQUEST_URL = "http://chargepoints.dft.gov.uk/api/retrieve/registry/lat/" +myLat + "/long/" +myLong +"/dist/10/format/json/limit/10";
+                //TODO add variables for distance and limit
+                ChargePoint_REQUEST_URL = "https://chargepoints.dft.gov.uk/api/retrieve/registry/lat/" + myLat + "/long/" + myLong + "/dist/10/format/json/limit/10";
 
-                //start asyncronous thread to retrieve charge points
+
+                //test URL creation with toast message 14/04/2020 works
+                Toast toast1 = Toast.makeText(context, ChargePoint_REQUEST_URL, duration);
+                toast1.show();
+
+                Log.i(LOG_TAG, "executing asynchronous thread");
+                //start asynchronous thread to retrieve charge points
                 new retrieveChargePoints().execute(ChargePoint_REQUEST_URL);
 
 
                 // Set the adapter on the {@link ListView}
                 // so the list can be populated in the user interface
+                //should this be outside the locationListener?
                 chargePointListView.setAdapter(adapter);
 
-            }
+        }
 
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -100,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             //distance in meters
         }
 
+        //create on item click listener to wait for selected charge point and send to maps on click
         chargePointListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -113,11 +126,11 @@ public class MainActivity extends AppCompatActivity {
                 String destLongString = Double.toString(destinationLongitude);
 
                 //test all the location data is here
-//                Context context = getApplicationContext();
-//                CharSequence text = " my latitude=" +myLatString +"\nmy longitude=" +myLongString +"\ndest lat=" +destLatString +"\ndest long=" +destLongString;
-//                int duration = Toast.LENGTH_LONG;
-//                Toast toast = Toast.makeText(context, text, duration);
-//                toast.show();
+                Context context = getApplicationContext();
+                CharSequence text = " my latitude=" +myLatString +"\nmy longitude=" +myLongString +"\ndest lat=" +destLatString +"\ndest long=" +destLongString;
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
 
 
                 //create uri for map intent
@@ -144,8 +157,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    private class retrieveChargePoints extends AsyncTask<String, Void, List<ChargePoint>> {
+// added static to prevent leaks 14/4/2020
+    private static class retrieveChargePoints extends AsyncTask<String, Void, List<ChargePoint>> {
+        //Context context;
         @Override
         protected List<ChargePoint> doInBackground(String... url) {
             //check and deal with no input url
@@ -153,19 +167,28 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
             //Perform the HTTP request for charge point data and process response
-              List<ChargePoint> chargePoints = QueryUtils.fetchChargePointData(url[0]);
+              //List<ChargePoint> chargePoints = QueryUtils.fetchChargePointData(url[0]);
+            //commented out for redundancy
+            Log.i(LOG_TAG, "fetching charge point data");
 
-            return chargePoints;
+
+//            int duration = Toast.LENGTH_LONG;
+//            Toast toast2 = Toast.makeText(context, "about to fetch charge point data", duration);
+//            toast2.show();
+            return QueryUtils.fetchChargePointData(url[0]);
         }
 
+        //made adapter static to match retrieveChargePoints
         @Override
         protected void onPostExecute(List<ChargePoint> chargePoints) {
             // Clear the adapter of previous data
              adapter.clear();
             //check for null charge point list, return early if that is the case, if there is a valid list then add to the adapter
             if (chargePoints != null && !chargePoints.isEmpty()){
+                Log.e(LOG_TAG, "Charge points full");
                 adapter.addAll(chargePoints);
             }
+
         }
 
     }

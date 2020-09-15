@@ -9,6 +9,9 @@ import static com.example.android.chargemycar.MainActivity.myLong;
 
 public class ChargePoint {
 
+    //TODO add Device Controller + hyperlink to website
+    //TODO add LocationType + corresponding symbol (car park, on street, leisure centre, OTHER)
+
         private String mName;
 
         private String mPostCode;

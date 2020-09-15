@@ -1,6 +1,6 @@
 package com.example.android.chargemycar;
 
-/**
+/*
  * Created by et_bo on 26/09/2017.
  */
 
@@ -26,11 +26,11 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Helper methods related to requesting and receiving earthquake data from USGS.
+ * Helper methods related to requesting and receiving Charge point data from website.
  */
 public final class QueryUtils {
 
-    /** Sample JSON response for a USGS query */
+    /** Sample JSON response for a Charge point query */
     private static final String SAMPLE_JSON_RESPONSE = "{\"Scheme\":{\"SchemeCode\":\"NA\",\"SchemeData\":{\"OrganisationName\":\"NA\",\"Website\":\"NA\",\"TelephoneNo\":\"NA\"}},\"ChargeDevice\":[{\"ChargeDeviceId\":\"219f81cc6c7826d1bb55686944865323\",\"ChargeDeviceRef\":\"SRC_LDN60207\",\"ChargeDeviceName\":\"Asda Roehampton\",\"ChargeDeviceText\":null,\"ChargeDeviceLocation\":{\"Latitude\":\"51.439365\",\"Longitude\":\"-0.245991\",\"Address\":{\"SubBuildingName\":null,\"BuildingName\":\"Asda Roehampton Superstore\",\"BuildingNumber\":\"31\",\"Thoroughfare\":\"Roehampton Vale\",\"Street\":\"Roehampton\",\"DoubleDependantLocality\":null,\"DependantLocality\":null,\"PostTown\":\"Putney\",\"County\":\"Greater London\",\"PostCode\":\"SW15 3DT\",\"Country\":\"gb\",\"UPRN\":null},\"LocationShortDescription\":null,\"LocationLongDescription\":\"\"},\"ChargeDeviceManufacturer\":null,\"ChargeDeviceModel\":null,\"PublishStatusID\":\"1\",\"DateCreated\":\"2014-08-19 05:15:15\",\"DateUpdated\":\"2015-08-26 11:39:37\",\"Attribution\":\"Source London\",\"DateDeleted\":\"n\\/a\",\"Connector\":[{\"ConnectorId\":\"1\",\"ConnectorType\":\"3-pin Type G (BS1363)\",\"RatedOutputkW\":\"3.7\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"16\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"1\",\"ChargePointStatus\":\"In service\",\"TetheredCable\":\"0\",\"Information\":\"  x 3-pin square (BS 1363) - Standard (up to 3.7kW, 13-16A)\",\"Validated\":\"0\"},{\"ConnectorId\":\"2\",\"ConnectorType\":\"4-pin Type G (BS1363)\",\"RatedOutputkW\":\"3.7\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"16\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"1\",\"ChargePointStatus\":\"In service\",\"TetheredCable\":\"0\",\"Information\":\"  x 3-pin square (BS 1363) - Standard (up to 3.7kW, 13-16A)\",\"Validated\":\"0\"}],\"DeviceOwner\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceController\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceAccess\":[],\"DeviceNetworks\":\"Source London\",\"ChargeDeviceStatus\":\"In service\",\"PublishStatus\":\"Published\",\"DeviceValidated\":\"0\",\"RecordModerated\":\"Y\",\"RecordLastUpdated\":\"2015-08-26 11:39:37\",\"RecordLastUpdatedBy\":\"NCR Admin\",\"PaymentRequiredFlag\":false,\"PaymentDetails\":\"\",\"SubscriptionRequiredFlag\":true,\"SubscriptionDetails\":\"\\u00a35 per annum for RFiD card\",\"ParkingFeesFlag\":false,\"ParkingFeesDetails\":\"\",\"ParkingFeesUrl\":null,\"AccessRestrictionFlag\":false,\"AccessRestrictionDetails\":\"\",\"PhysicalRestrictionFlag\":false,\"PhysicalRestrictionText\":\"\",\"OnStreetFlag\":false,\"LocationType\":\"Retail car park\",\"Bearing\":null,\"Accessible24Hours\":false},{\"ChargeDeviceId\":\"41f3cba68ffb2f2a2181b08abb545f89\",\"ChargeDeviceRef\":\"SRC_LDN60246\",\"ChargeDeviceName\":\"Charing Cross Hospital\",\"ChargeDeviceText\":null,\"ChargeDeviceLocation\":{\"Latitude\":\"51.486559\",\"Longitude\":\"-0.220487\",\"Address\":{\"SubBuildingName\":null,\"BuildingName\":\"\",\"BuildingNumber\":\"214\",\"Thoroughfare\":\"Fulham Palace Road\",\"Street\":\"Hammersmith\",\"DoubleDependantLocality\":null,\"DependantLocality\":null,\"PostTown\":\"Hammersmith\",\"County\":\"Greater London\",\"PostCode\":\"W6 9NT\",\"Country\":\"gb\",\"UPRN\":null},\"LocationShortDescription\":null,\"LocationLongDescription\":\"\"},\"ChargeDeviceManufacturer\":null,\"ChargeDeviceModel\":null,\"PublishStatusID\":\"1\",\"DateCreated\":\"2014-08-19 05:15:41\",\"DateUpdated\":\"2015-09-02 14:33:40\",\"Attribution\":\"Source London\",\"DateDeleted\":\"n\\/a\",\"Connector\":[{\"ConnectorId\":\"1\",\"ConnectorType\":\"3-pin Type G (BS1363)\",\"RatedOutputkW\":\"3.7\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"16\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"1\",\"ChargePointStatus\":\"In service\",\"TetheredCable\":\"0\",\"Information\":\"  x 3-pin square (BS 1363) - Standard (up to 3.7kW, 13-16A)\",\"Validated\":\"0\"},{\"ConnectorId\":\"2\",\"ConnectorType\":\"3-pin Type G (BS1363)\",\"RatedOutputkW\":\"3.7\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"16\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"1\",\"ChargePointStatus\":\"In service\",\"TetheredCable\":\"0\",\"Information\":\"  x 3-pin square (BS 1363) - Standard (up to 3.7kW, 13-16A)\",\"Validated\":\"0\"}],\"DeviceOwner\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceController\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceAccess\":[],\"DeviceNetworks\":\"Source London\",\"ChargeDeviceStatus\":\"In service\",\"PublishStatus\":\"Published\",\"DeviceValidated\":\"0\",\"RecordModerated\":\"Y\",\"RecordLastUpdated\":\"2015-09-02 14:33:40\",\"RecordLastUpdatedBy\":\"NCR Admin\",\"PaymentRequiredFlag\":false,\"PaymentDetails\":\"\",\"SubscriptionRequiredFlag\":true,\"SubscriptionDetails\":\"\\u00a35 per annum for RFiD card\",\"ParkingFeesFlag\":false,\"ParkingFeesDetails\":\"\",\"ParkingFeesUrl\":null,\"AccessRestrictionFlag\":false,\"AccessRestrictionDetails\":\"\",\"PhysicalRestrictionFlag\":true,\"PhysicalRestrictionText\":\"\",\"OnStreetFlag\":false,\"LocationType\":\"NHS property\",\"Bearing\":null,\"Accessible24Hours\":false},{\"ChargeDeviceId\":\"a38b49209472b0772d3937c7ec229295\",\"ChargeDeviceRef\":\"SRC_LDN60286\",\"ChargeDeviceName\":\"Exchange Shopping Centre Car Park 1\",\"ChargeDeviceText\":null,\"ChargeDeviceLocation\":{\"Latitude\":\"51.463980\",\"Longitude\":\"-0.216975\",\"Address\":{\"SubBuildingName\":null,\"BuildingName\":\"\",\"BuildingNumber\":\"\",\"Thoroughfare\":\"Putney High Street\",\"Street\":\"\",\"DoubleDependantLocality\":null,\"DependantLocality\":null,\"PostTown\":\"Putney\",\"County\":\"Greater London\",\"PostCode\":\"SW15 1TW\",\"Country\":\"gb\",\"UPRN\":null},\"LocationShortDescription\":null,\"LocationLongDescription\":\"\"},\"ChargeDeviceManufacturer\":null,\"ChargeDeviceModel\":\"\",\"PublishStatusID\":\"1\",\"DateCreated\":\"2014-08-19 05:16:07\",\"DateUpdated\":\"2015-10-15 10:06:38\",\"Attribution\":\"Source London\",\"DateDeleted\":\"n\\/a\",\"Connector\":[{\"ConnectorId\":\"1\",\"ConnectorType\":\"Type 2 Mennekes (IEC62196)\",\"RatedOutputkW\":\"7.0\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"32\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"3\",\"ChargePointStatus\":\"Out of service\",\"TetheredCable\":\"0\",\"Information\":\"  x 7-pin \'Smart\' eg Mennekes (IEC 62196) - Fast (7kW, 32A)\",\"Validated\":\"0\"},{\"ConnectorId\":\"2\",\"ConnectorType\":\"Type 2 Mennekes (IEC62196)\",\"RatedOutputkW\":\"7.0\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"32\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"3\",\"ChargePointStatus\":\"Out of service\",\"TetheredCable\":\"0\",\"Information\":\"  x 7-pin \'Smart\' eg Mennekes (IEC 62196) - Fast (7kW, 32A)\",\"Validated\":\"0\"}],\"DeviceOwner\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceController\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceAccess\":[],\"DeviceNetworks\":\"Source London\",\"ChargeDeviceStatus\":\"Out of service\",\"PublishStatus\":\"Published\",\"DeviceValidated\":\"0\",\"RecordModerated\":\"Y\",\"RecordLastUpdated\":\"2015-10-15 10:06:38\",\"RecordLastUpdatedBy\":\"NCR Admin\",\"PaymentRequiredFlag\":false,\"PaymentDetails\":\"\",\"SubscriptionRequiredFlag\":true,\"SubscriptionDetails\":\"\\u00a35 per annum for RFiD card\",\"ParkingFeesFlag\":false,\"ParkingFeesDetails\":\"\",\"ParkingFeesUrl\":null,\"AccessRestrictionFlag\":false,\"AccessRestrictionDetails\":\"\",\"PhysicalRestrictionFlag\":false,\"PhysicalRestrictionText\":\"\",\"OnStreetFlag\":false,\"LocationType\":\"Retail car park\",\"Bearing\":null,\"Accessible24Hours\":false},{\"ChargeDeviceId\":\"4bdb3b694acca9162c97f75efe9faca1\",\"ChargeDeviceRef\":\"SRC_LDN60514\",\"ChargeDeviceName\":\"Putney Leisure Centre\",\"ChargeDeviceText\":null,\"ChargeDeviceLocation\":{\"Latitude\":\"51.463908\",\"Longitude\":\"-0.228811\",\"Address\":{\"SubBuildingName\":null,\"BuildingName\":null,\"BuildingNumber\":null,\"Thoroughfare\":null,\"Street\":null,\"DoubleDependantLocality\":null,\"DependantLocality\":null,\"PostTown\":null,\"County\":null,\"PostCode\":null,\"Country\":\"gb\",\"UPRN\":null},\"LocationShortDescription\":null,\"LocationLongDescription\":\"Dryburgh Road, Putney, Wandsworth, London, SW15 1BL\"},\"ChargeDeviceManufacturer\":null,\"ChargeDeviceModel\":null,\"PublishStatusID\":\"1\",\"DateCreated\":\"2014-08-19 05:18:36\",\"DateUpdated\":\"2015-09-09 14:37:12\",\"Attribution\":\"Source London\",\"DateDeleted\":\"n\\/a\",\"Connector\":[{\"ConnectorId\":\"1\",\"ConnectorType\":\"3-pin Type G (BS1363)\",\"RatedOutputkW\":\"3.7\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"16\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"1\",\"ChargePointStatus\":\"Out of service\",\"TetheredCable\":\"0\",\"Information\":\"  x 3-pin square (BS 1363) - Standard (up to 3.7kW, 13-16A)\",\"Validated\":\"0\"}],\"DeviceOwner\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceController\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceAccess\":[],\"DeviceNetworks\":\"Source London\",\"ChargeDeviceStatus\":\"Out of service\",\"PublishStatus\":\"Published\",\"DeviceValidated\":\"0\",\"RecordModerated\":\"N\",\"RecordLastUpdated\":null,\"RecordLastUpdatedBy\":\"\",\"PaymentRequiredFlag\":false,\"PaymentDetails\":null,\"SubscriptionRequiredFlag\":true,\"SubscriptionDetails\":\"\\u00a35 per annum for RFiD card\",\"ParkingFeesFlag\":false,\"ParkingFeesDetails\":null,\"ParkingFeesUrl\":null,\"AccessRestrictionFlag\":false,\"AccessRestrictionDetails\":null,\"PhysicalRestrictionFlag\":false,\"PhysicalRestrictionText\":null,\"OnStreetFlag\":false,\"LocationType\":\"Leisure centre\",\"Bearing\":null,\"Accessible24Hours\":false},{\"ChargeDeviceId\":\"0d3d81a9e226a7158a77a5b862311b4e\",\"ChargeDeviceRef\":\"SRC_LDN60568\",\"ChargeDeviceName\":\"St Johns Avenue\",\"ChargeDeviceText\":null,\"ChargeDeviceLocation\":{\"Latitude\":\"51.459622\",\"Longitude\":\"-0.217764\",\"Address\":{\"SubBuildingName\":null,\"BuildingName\":null,\"BuildingNumber\":null,\"Thoroughfare\":null,\"Street\":null,\"DoubleDependantLocality\":null,\"DependantLocality\":null,\"PostTown\":null,\"County\":null,\"PostCode\":null,\"Country\":\"gb\",\"UPRN\":null},\"LocationShortDescription\":null,\"LocationLongDescription\":\"St Johns Avenue, Putney, Wandsworth, London, SW15 6AF\"},\"ChargeDeviceManufacturer\":null,\"ChargeDeviceModel\":null,\"PublishStatusID\":\"1\",\"DateCreated\":\"2014-08-19 05:19:16\",\"DateUpdated\":\"0000-00-00 00:00:00\",\"Attribution\":\"Source London\",\"DateDeleted\":\"n\\/a\",\"Connector\":[{\"ConnectorId\":\"1\",\"ConnectorType\":\"3-pin Type G (BS1363)\",\"RatedOutputkW\":\"3.7\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"16\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"1\",\"ChargePointStatus\":\"In service\",\"TetheredCable\":\"0\",\"Information\":\"  x 3-pin square (BS 1363) - Standard (up to 3.7kW, 13-16A)\",\"Validated\":\"0\"},{\"ConnectorId\":\"2\",\"ConnectorType\":\"3-pin Type G (BS1363)\",\"RatedOutputkW\":\"3.7\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"16\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"1\",\"ChargePointStatus\":\"Out of service\",\"TetheredCable\":\"0\",\"Information\":\"  x 3-pin square (BS 1363) - Standard (up to 3.7kW, 13-16A)\",\"Validated\":\"0\"}],\"DeviceOwner\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceController\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceAccess\":[],\"DeviceNetworks\":\"Source London\",\"ChargeDeviceStatus\":\"In service\",\"PublishStatus\":\"Published\",\"DeviceValidated\":\"0\",\"RecordModerated\":\"N\",\"RecordLastUpdated\":null,\"RecordLastUpdatedBy\":\"\",\"PaymentRequiredFlag\":false,\"PaymentDetails\":null,\"SubscriptionRequiredFlag\":true,\"SubscriptionDetails\":\"\\u00a35 per annum for RFiD card\",\"ParkingFeesFlag\":false,\"ParkingFeesDetails\":null,\"ParkingFeesUrl\":null,\"AccessRestrictionFlag\":false,\"AccessRestrictionDetails\":null,\"PhysicalRestrictionFlag\":false,\"PhysicalRestrictionText\":null,\"OnStreetFlag\":true,\"LocationType\":\"Other\",\"Bearing\":null,\"Accessible24Hours\":false},{\"ChargeDeviceId\":\"81e98219f751b64b9e7ec0e4e5c6d0e4\",\"ChargeDeviceRef\":\"NCRA131\",\"ChargeDeviceName\":\"Exchange Shopping Centre Car Park 2\",\"ChargeDeviceText\":null,\"ChargeDeviceLocation\":{\"Latitude\":\"51.463906\",\"Longitude\":\"-0.216287\",\"Address\":{\"SubBuildingName\":null,\"BuildingName\":\"\",\"BuildingNumber\":\"5\",\"Thoroughfare\":\"Lacy Road\",\"Street\":\"\",\"DoubleDependantLocality\":null,\"DependantLocality\":null,\"PostTown\":\"Putney\",\"County\":\"Greater London\",\"PostCode\":\"SW15 1TW\",\"Country\":\"gb\",\"UPRN\":null},\"LocationShortDescription\":null,\"LocationLongDescription\":\"\"},\"ChargeDeviceManufacturer\":null,\"ChargeDeviceModel\":\"\",\"PublishStatusID\":\"1\",\"DateCreated\":\"2015-10-15 10:07:28\",\"DateUpdated\":\"2015-10-15 10:07:28\",\"Attribution\":\"Source London\",\"DateDeleted\":\"n\\/a\",\"Connector\":[{\"ConnectorId\":\"1\",\"ConnectorType\":\"Type 2 Mennekes (IEC62196)\",\"RatedOutputkW\":\"7.0\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"32\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"3\",\"ChargePointStatus\":\"Out of service\",\"TetheredCable\":\"0\",\"Information\":\"\",\"Validated\":\"0\"},{\"ConnectorId\":\"2\",\"ConnectorType\":\"Type 2 Mennekes (IEC62196)\",\"RatedOutputkW\":\"7.0\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"32\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"3\",\"ChargePointStatus\":\"Out of service\",\"TetheredCable\":\"0\",\"Information\":\"\",\"Validated\":\"0\"}],\"DeviceOwner\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceController\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceAccess\":[],\"DeviceNetworks\":\"Source London\",\"ChargeDeviceStatus\":\"Out of service\",\"PublishStatus\":\"Published\",\"DeviceValidated\":\"0\",\"RecordModerated\":\"N\",\"RecordLastUpdated\":null,\"RecordLastUpdatedBy\":\"\",\"PaymentRequiredFlag\":false,\"PaymentDetails\":\"\",\"SubscriptionRequiredFlag\":false,\"SubscriptionDetails\":\"\",\"ParkingFeesFlag\":false,\"ParkingFeesDetails\":\"\",\"ParkingFeesUrl\":null,\"AccessRestrictionFlag\":false,\"AccessRestrictionDetails\":\"\",\"PhysicalRestrictionFlag\":false,\"PhysicalRestrictionText\":\"\",\"OnStreetFlag\":false,\"LocationType\":\"Retail car park\",\"Bearing\":null,\"Accessible24Hours\":false},{\"ChargeDeviceId\":\"c7051dbf9f079a789189c4e6cfe490a5\",\"ChargeDeviceRef\":\"NCRA132\",\"ChargeDeviceName\":\"Exchange Shopping Centre Car Park 3\",\"ChargeDeviceText\":null,\"ChargeDeviceLocation\":{\"Latitude\":\"51.463906\",\"Longitude\":\"-0.216287\",\"Address\":{\"SubBuildingName\":null,\"BuildingName\":\"\",\"BuildingNumber\":\"5\",\"Thoroughfare\":\"Lacy Road\",\"Street\":\"\",\"DoubleDependantLocality\":null,\"DependantLocality\":null,\"PostTown\":\"Putney\",\"County\":\"Greater London\",\"PostCode\":\"SW15 1TW\",\"Country\":\"gb\",\"UPRN\":null},\"LocationShortDescription\":null,\"LocationLongDescription\":\"\"},\"ChargeDeviceManufacturer\":null,\"ChargeDeviceModel\":\"\",\"PublishStatusID\":\"1\",\"DateCreated\":\"2015-10-15 10:08:31\",\"DateUpdated\":\"2015-10-15 10:08:31\",\"Attribution\":\"Source London\",\"DateDeleted\":\"n\\/a\",\"Connector\":[{\"ConnectorId\":\"1\",\"ConnectorType\":\"Type 2 Mennekes (IEC62196)\",\"RatedOutputkW\":\"7.0\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"32\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"3\",\"ChargePointStatus\":\"Out of service\",\"TetheredCable\":\"0\",\"Information\":\"\",\"Validated\":\"0\"},{\"ConnectorId\":\"2\",\"ConnectorType\":\"Type 2 Mennekes (IEC62196)\",\"RatedOutputkW\":\"7.0\",\"RatedOutputVoltage\":\"230\",\"RatedOutputCurrent\":\"32\",\"ChargeMethod\":\"Single Phase AC\",\"ChargeMode\":\"3\",\"ChargePointStatus\":\"Out of service\",\"TetheredCable\":\"0\",\"Information\":\"\",\"Validated\":\"0\"}],\"DeviceOwner\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceController\":{\"OrganisationName\":\"Source London\",\"SchemeCode\":\"SRC_LDN\",\"Website\":\"https:\\/\\/www.sourcelondon.net\",\"TelephoneNo\":\"020 3056 8989\"},\"DeviceAccess\":[],\"DeviceNetworks\":\"Source London\",\"ChargeDeviceStatus\":\"Out of service\",\"PublishStatus\":\"Published\",\"DeviceValidated\":\"0\",\"RecordModerated\":\"N\",\"RecordLastUpdated\":null,\"RecordLastUpdatedBy\":\"\",\"PaymentRequiredFlag\":false,\"PaymentDetails\":\"\",\"SubscriptionRequiredFlag\":false,\"SubscriptionDetails\":\"\",\"ParkingFeesFlag\":false,\"ParkingFeesDetails\":\"\",\"ParkingFeesUrl\":null,\"AccessRestrictionFlag\":false,\"AccessRestrictionDetails\":\"\",\"PhysicalRestrictionFlag\":false,\"PhysicalRestrictionText\":\"\",\"OnStreetFlag\":false,\"LocationType\":\"Retail car park\",\"Bearing\":null,\"Accessible24Hours\":false}]}";
     /**
      * Create a private constructor because no one should ever create a {@link QueryUtils} object.
@@ -43,13 +43,13 @@ public final class QueryUtils {
     //Tag for log messages
     public static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
-    /**
+    /*
      * Query the National Charge Point Registry database and return an {@Link ArrayList} to represent a list of charge points
      */
     public static List<ChargePoint> fetchChargePointData (String requestUrl) {
         //Create URL object
         URL url = createUrl(requestUrl);
-
+            Log.e(LOG_TAG, requestUrl);
         //Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
         try {
@@ -59,10 +59,10 @@ public final class QueryUtils {
         }
 
         // Extract relevant fields from the JSON response and create an {@Link ArrayList)
-        List<ChargePoint> chargePoints = extractChargePoints(jsonResponse);
-
+        //List<ChargePoint> chargePoints = extractChargePoints(jsonResponse);
+        //commented out for redundancy
         //Return the (@Link ArrayList)
-        return chargePoints;
+        return extractChargePoints(jsonResponse);
     }
 
     /**
@@ -104,7 +104,7 @@ public final class QueryUtils {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
-                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode() +" "+ urlConnection.getResponseMessage());
             }
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem retrieving the charge point JSON results.", e);
@@ -116,6 +116,7 @@ public final class QueryUtils {
                 inputStream.close();
             }
         }
+        Log.e(LOG_TAG,"HTTP request done");
         return jsonResponse;
     }
 
@@ -148,6 +149,7 @@ public final class QueryUtils {
 
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(chargePointJSON)){
+            Log.e(LOG_TAG, "JSON string is empty");
             return null;
         }
 
@@ -155,10 +157,11 @@ public final class QueryUtils {
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
-
+            Log.e(LOG_TAG, "trying to separate charge point data");
             // build up a list of Charge Point objects with the corresponding data.
             JSONObject chargePointData = new JSONObject(chargePointJSON);
             JSONArray chargeDevices = chargePointData.getJSONArray("ChargeDevice");
+            Log.e(LOG_TAG, "there are "+chargeDevices.length()+" devices in the data");
 
             for (int i=0; i<chargeDevices.length(); i++){
                 JSONObject chargeDevice = chargeDevices.getJSONObject(i);
@@ -167,12 +170,7 @@ public final class QueryUtils {
 
                 String status = chargeDevice.getString("ChargeDeviceStatus");
                 boolean chargePointStatus;
-                if (status.equals("In service")){
-                     chargePointStatus = true;
-                }
-                else {
-                    chargePointStatus = false;
-                }
+                chargePointStatus = status.equals("In service");
 
                 JSONObject deviceLocation = chargeDevice.getJSONObject("ChargeDeviceLocation");
                 double latitude = deviceLocation.getDouble("Latitude");
@@ -198,22 +196,19 @@ public final class QueryUtils {
                         workingConnectors++;
                     }
                 }
-                Log.i("QueryUtils", Arrays.toString(connectorTypes));
+                Log.e(LOG_TAG, Arrays.toString(connectorTypes));
                 boolean sameConnectors = true;
                 for (int k = 1; k<connectorNumber; k++) {
                     String s1 = connectorTypes[k-1];
                     String s2 = connectorTypes[k];
                     Log.i("QueryUtils", s1);
                     Log.i("QueryUtils", s2);
-                   if (s1.equals(s2)){
-                       sameConnectors = true;
-                   }
-                   else  sameConnectors = false;
+                    sameConnectors = s1.equals(s2);
                 }
 
                 JSONObject connector1 = connectors.getJSONObject(0);
                 String connectorType = connector1.getString("ConnectorType");
-                if (sameConnectors == false){
+                if (!sameConnectors){
                      connectorType = "Multiple Connector Types";
                 }
 
@@ -230,16 +225,17 @@ public final class QueryUtils {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the charge point JSON results", e);
         }
 
        // Sort list of charge points by their distance from the user
         Collections.sort(chargePoints, new Comparator<ChargePoint>() {
             @Override
             public int compare(ChargePoint o1, ChargePoint o2) {
-                if (o1.getRealDistance() < o2.getRealDistance()) return -1;
-                if (o1.getRealDistance() > o2.getRealDistance()) return 1;
-                return 0;
+//                if (o1.getRealDistance() < o2.getRealDistance()) return -1;
+//                if (o1.getRealDistance() > o2.getRealDistance()) return 1;
+//                return 0;
+                return Double.compare(o1.getRealDistance(), o2.getRealDistance());
             }
         });
 
