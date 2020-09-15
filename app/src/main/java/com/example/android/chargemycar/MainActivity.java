@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    //TODO GET THIS ON GITHUB!!!
     public static final String LOG_TAG = MainActivity.class.getName();
 
     public static double myLat;
