@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static double myLat;
     public static double myLong;
 
-    private static  String ChargePoint_REQUEST_URL = "http://chargepoints.dft.gov.uk/api/retrieve/registry/postcode/SW15+5QS/dist/7/format/json/limit/10";
+    public static  String ChargePoint_REQUEST_URL; //= "http://chargepoints.dft.gov.uk/api/retrieve/registry/postcode/SW15+5QS/dist/7/format/json/limit/10";
 
     private static ChargePointAdapter adapter;
 
@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         // Create a ChargingPointAdapter, whose data source is a list of ChargePoints, which creates listview items for each item
         adapter = new ChargePointAdapter(this, new ArrayList<ChargePoint>());
 
+        // Set the adapter on the {@link ListView}
+        // so the list can be populated in the user interface
+        chargePointListView.setAdapter(adapter);
+
         /* create locationListener to request GPS data and track current position in asynctask?? */
         locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -61,31 +65,14 @@ public class MainActivity extends AppCompatActivity {
                 String myLatString = Double.toString(myLat);
                 String myLongString = Double.toString(myLong);
                 Log.e(LOG_TAG,"\n"+myLatString+"\n"+myLongString);
-                //test with toast
-                Context context = getApplicationContext();
-                CharSequence text = " my latitude=" + myLatString + "\nmy longitude=" + myLongString;
-                int duration = Toast.LENGTH_LONG;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
 
                 //create request URL using live location
                 //TODO add variables for distance and limit
                 ChargePoint_REQUEST_URL = "https://chargepoints.dft.gov.uk/api/retrieve/registry/lat/" + myLat + "/long/" + myLong + "/dist/10/format/json/limit/10";
 
-
-                //test URL creation with toast message 14/04/2020 works
-                Toast toast1 = Toast.makeText(context, ChargePoint_REQUEST_URL, duration);
-                toast1.show();
-
                 Log.i(LOG_TAG, "executing asynchronous thread");
                 //start asynchronous thread to retrieve charge points
                 new retrieveChargePoints().execute(ChargePoint_REQUEST_URL);
-
-
-                // Set the adapter on the {@link ListView}
-                // so the list can be populated in the user interface
-                //should this be outside the locationListener?
-                chargePointListView.setAdapter(adapter);
 
         }
 
@@ -124,15 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 String destLatString = Double.toString(destinationLatitude);
                 String destLongString = Double.toString(destinationLongitude);
 
-                //test all the location data is here
-                Context context = getApplicationContext();
-                CharSequence text = " my latitude=" +myLatString +"\nmy longitude=" +myLongString +"\ndest lat=" +destLatString +"\ndest long=" +destLongString;
-                int duration = Toast.LENGTH_LONG;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
 
-
-                //create uri for map intent
+                //create uri for map intent with Google Maps
                 String url = "http://maps.google.com/maps?saddr="+myLatString+","+myLongString+"&daddr="+destLatString+","+destLongString+"&travelmode=driving";
                 Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url));
                     mapIntent.setPackage("com.google.android.apps.maps");
@@ -155,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
 // added static to prevent leaks 14/4/2020
     //Async Task used for network request on background thread
@@ -180,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(LOG_TAG, "Charge points full");
                 adapter.addAll(chargePoints);
             }
-            //TODO add return if chargePoints is null
+            //TODO add return if chargePoints is null + error message
 
         }
 
