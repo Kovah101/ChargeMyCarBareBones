@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    //TODO GET THIS ON GITHUB!!!
     public static final String LOG_TAG = MainActivity.class.getName();
 
     public static double myLat;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // Create a ChargingPointAdapter, whose data source is a list of ChargePoints, which creates listview items for each item
         adapter = new ChargePointAdapter(this, new ArrayList<ChargePoint>());
 
-        /* create locationListener to request GPS data and track current position */
+        /* create locationListener to request GPS data and track current position in asynctask?? */
         locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
@@ -158,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 // added static to prevent leaks 14/4/2020
+    //Async Task used for network request on background thread
     private static class retrieveChargePoints extends AsyncTask<String, Void, List<ChargePoint>> {
         //Context context;
         @Override
@@ -167,14 +167,6 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
             //Perform the HTTP request for charge point data and process response
-              //List<ChargePoint> chargePoints = QueryUtils.fetchChargePointData(url[0]);
-            //commented out for redundancy
-            Log.i(LOG_TAG, "fetching charge point data");
-
-
-//            int duration = Toast.LENGTH_LONG;
-//            Toast toast2 = Toast.makeText(context, "about to fetch charge point data", duration);
-//            toast2.show();
             return QueryUtils.fetchChargePointData(url[0]);
         }
 
@@ -188,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(LOG_TAG, "Charge points full");
                 adapter.addAll(chargePoints);
             }
+            //TODO add return if chargePoints is null
 
         }
 

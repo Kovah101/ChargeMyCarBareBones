@@ -142,7 +142,7 @@ public final class QueryUtils {
      * Return a list of {@link ChargePoint} objects that has been built up from
      * parsing a JSON response.
      */
-    public static List<ChargePoint> extractChargePoints(String chargePointJSON) {
+    private static List<ChargePoint> extractChargePoints(String chargePointJSON) {
 
         // Create an empty ArrayList that we can start adding charge points to
         List<ChargePoint> chargePoints = new ArrayList<>();
@@ -157,21 +157,21 @@ public final class QueryUtils {
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
-            Log.e(LOG_TAG, "trying to separate charge point data");
+            //Log.e(LOG_TAG, "trying to separate charge point data");
             // build up a list of Charge Point objects with the corresponding data.
             JSONObject chargePointData = new JSONObject(chargePointJSON);
             JSONArray chargeDevices = chargePointData.getJSONArray("ChargeDevice");
-            Log.e(LOG_TAG, "there are "+chargeDevices.length()+" devices in the data");
+            //Log.e(LOG_TAG, "there are "+chargeDevices.length()+" devices in the data");
 
             for (int i=0; i<chargeDevices.length(); i++){
                 JSONObject chargeDevice = chargeDevices.getJSONObject(i);
-
+                //extracts name of device
                 String name = chargeDevice.getString("ChargeDeviceName");
-
+                //extracts device status
                 String status = chargeDevice.getString("ChargeDeviceStatus");
                 boolean chargePointStatus;
                 chargePointStatus = status.equals("In service");
-
+                //extracts location (latitude, longitude, address and postcode
                 JSONObject deviceLocation = chargeDevice.getJSONObject("ChargeDeviceLocation");
                 double latitude = deviceLocation.getDouble("Latitude");
                 double longitude = deviceLocation.getDouble("Longitude");
@@ -196,16 +196,14 @@ public final class QueryUtils {
                         workingConnectors++;
                     }
                 }
-                Log.e(LOG_TAG, Arrays.toString(connectorTypes));
+                //determine if all the connectors are of the same type
                 boolean sameConnectors = true;
                 for (int k = 1; k<connectorNumber; k++) {
                     String s1 = connectorTypes[k-1];
                     String s2 = connectorTypes[k];
-                    Log.i("QueryUtils", s1);
-                    Log.i("QueryUtils", s2);
                     sameConnectors = s1.equals(s2);
                 }
-
+                //extract connector type
                 JSONObject connector1 = connectors.getJSONObject(0);
                 String connectorType = connector1.getString("ConnectorType");
                 if (!sameConnectors){
