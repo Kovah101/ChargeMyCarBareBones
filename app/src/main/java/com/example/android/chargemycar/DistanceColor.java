@@ -9,7 +9,7 @@ public class DistanceColor {
     public static int getColors (double distance){
         int color = 0;
         //distance is in 1km units
-        //TODO better granulate colour
+        //TODO better granulate colours
          if (distance<0.25){
              color = R.color.distance1;
          }

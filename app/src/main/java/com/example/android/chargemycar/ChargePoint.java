@@ -1,7 +1,7 @@
 package com.example.android.chargemycar;
 
-import static com.example.android.chargemycar.MainActivity.myLat;
-import static com.example.android.chargemycar.MainActivity.myLong;
+import static com.example.android.chargemycar.myLocationListener.myLatitude;
+import static com.example.android.chargemycar.myLocationListener.myLongitude;
 
 /**
  * Created by et_bo on 21/09/2017.
@@ -47,13 +47,15 @@ public class ChargePoint {
 
             //find distance between two points on the earth
             //round to km with 1decimal place of accuracy
-            mRealDistance = Haversine.distance(myLat,myLong,mlatitude,mlongitude);
+            mRealDistance = Haversine.distance(myLatitude,myLongitude,mlatitude,mlongitude);
             mDistance = String.format("%.2f",mRealDistance);
+            //returns colour based on absolute distance scale
+            //TODO possibly change to dynamic scale based off of max distance?
             mColor = DistanceColor.getColors(mRealDistance);
         }
 
 
-
+        //TODO deal with null values
         public String getCPName(){
             return mName;
         }

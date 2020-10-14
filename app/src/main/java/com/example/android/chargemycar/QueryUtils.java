@@ -116,7 +116,7 @@ public final class QueryUtils {
                 inputStream.close();
             }
         }
-        Log.e(LOG_TAG,"HTTP request done");
+        //Log.e(LOG_TAG,"HTTP request done");
         return jsonResponse;
     }
 

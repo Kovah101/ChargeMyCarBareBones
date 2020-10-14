@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Charge My Car</string>
+    <string name="no_charge_points">No Charge Points Found</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="setting_menu_item">Settings</string>
+    <string name="settings_title">Charge Point Settings</string>
+
+    <!--Strings for Settings - max distance and max limit of charge points displayed -->
+    <string name="settings_max_distance_label">Max Distance</string>
+    <string name="settings_max_distance_key" translatable="false">max_distance</string>
+    <string name="settings_max_distance_default" translatable="false">10</string>
+
+    <string name="settings_cp_limit_label">Max Number Of Charge Points</string>
+    <string name="settings_cp_limit_key" translatable="false">cp_limit</string>
+    <string name="settings_cp_limit_default" translatable="false">10</string>
 </resources>
